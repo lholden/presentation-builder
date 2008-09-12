@@ -14,8 +14,24 @@ module Presentation
   def self.build
     (Builder.new).build
   end
-  
+  module Helpers
+    def h(string)
+      # not really a sanatizer, but don't want to break <pre> tags if html is
+      # used for the code helper.
+      string.gsub(/[<]/, '&lt;').gsub(/[>]/, '&gt;')
+    end
+    
+    def handout(string)
+      %Q{<div class="handout">#{string}</div>}
+    end
+    
+    def code(lang, string)
+      %Q{<pre name="code" class="#{lang}:nocontrols">#{h string.gsub!(' ', '&nbsp;')}</pre>}
+    end
+  end
   class Builder
+    include Helpers
+    
     def build
       open('index.html', 'w') do |out|
         out << process
