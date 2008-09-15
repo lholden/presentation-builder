@@ -2,6 +2,7 @@ require 'rubygems'
 require 'rdiscount'
 require 'erubis'
 require 'ostruct'
+require 'uv'
 
 module Presentation
   Presentation::Config = OpenStruct.new(
@@ -26,7 +27,8 @@ module Presentation
     end
     
     def code(lang, string)
-      %Q{<pre name="code" class="#{lang}:nocontrols">#{h string.gsub!(' ', '&nbsp;')}</pre>}
+      code_str = Uv.parse( string.strip, 'xhtml', lang, false, "twilight")
+      "\n\n#{code_str}\n\n"
     end
   end
   class Builder
