@@ -27,7 +27,7 @@ module Presentation
     end
     
     def code(lang, string)
-      code_str = Uv.parse( string.strip, 'xhtml', lang, false, "twilight")
+      code_str = Uv.parse( string.strip, 'xhtml', lang, false, "sunburst")
       "\n\n#{code_str}\n\n"
     end
   end
