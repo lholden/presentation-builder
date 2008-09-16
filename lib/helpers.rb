@@ -10,7 +10,7 @@ module Presentation
     end
     
     def code(lang, string)
-      code_str = Uv.parse(string, 'xhtml', lang, false, "sunburst")
+      code_str = Uv.parse(string, 'xhtml', lang, false, Config.highlight_theme)
       "\n\n#{code_str}\n\n"
     end
     

@@ -7,6 +7,7 @@ module Presentation
     :example_dir => 'examples',
     :destination_file => 'index.html',
     :markup => 'markdown', # configs filename. my_file.markdown.eruby for example
-    :erubis_extension => 'eruby'
+    :erubis_extension => 'eruby',
+    :highlight_theme => 'sunburst'
   )
 end
