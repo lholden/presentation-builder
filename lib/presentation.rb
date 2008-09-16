@@ -1,41 +1,23 @@
 require 'rubygems'
 require 'rdiscount'
 require 'erubis'
-require 'ostruct'
 require 'uv'
 
+PB_PATH = File.dirname(File.dirname(__FILE__))
+
+require File.join(PB_PATH, 'config')
+require File.join(PB_PATH, 'lib', 'helpers')
+
 module Presentation
-  Presentation::Config = OpenStruct.new(
-    :layout_file => File.join('src', 'index.html.eruby'),
-    :slide_dir => File.join('src', 'slides'),
-    :markup => 'markdown',
-    :erubis_extension => 'eruby'
-  )
+  def self.build(*args)
+    (Builder.new).build(*args)
+  end
   
-  def self.build
-    (Builder.new).build
-  end
-  module Helpers
-    def h(string)
-      # not really a sanatizer, but don't want to break <pre> tags if html is
-      # used for the code helper.
-      string.gsub(/[<]/, '&lt;').gsub(/[>]/, '&gt;')
-    end
-    
-    def handout(string)
-      %Q{<div class="handout">#{string}</div>}
-    end
-    
-    def code(lang, string)
-      code_str = Uv.parse( string.strip, 'xhtml', lang, false, "sunburst")
-      "\n\n#{code_str}\n\n"
-    end
-  end
   class Builder
     include Helpers
     
     def build
-      open('index.html', 'w') do |out|
+      open(Config.destination_file, 'w') do |out|
         out << process
       end
     end
