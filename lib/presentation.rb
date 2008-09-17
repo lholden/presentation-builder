@@ -8,6 +8,8 @@ PB_PATH = File.dirname(File.dirname(__FILE__))
 require File.join(PB_PATH, 'config')
 require File.join(PB_PATH, 'lib', 'helpers')
 
+# Depends on:
+#   rdiscount, erubis, ultraviolet
 module Presentation
   def self.build(*args)
     (Builder.new).build(*args)
