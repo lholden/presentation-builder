@@ -2,12 +2,12 @@ require 'ostruct'
 
 module Presentation
   Config = OpenStruct.new(
-    :layout_file => File.join('src', 'index.html.eruby'),
-    :slide_dir => File.join('src', 'slides'),
+    :template_dir => 'templates',
+    :layout_file => 'index.html.eruby',
+    :slide_dir => 'slides', # path under template_dir
     :example_dir => 'examples',
     :destination_file => File.join('public', 'index.html'),
-    :markup => 'markdown', # configs filename. my_file.markdown.eruby for example
-    :erubis_extension => 'eruby',
+    :slide_extension => 'markdown.eruby',
     :highlight_theme => 'sunburst'
   )
 end
