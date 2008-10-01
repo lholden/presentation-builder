@@ -1,3 +1,8 @@
+# = Presentation Builder
+#
+# Author:: Lori Holden (http://loriholden.com)
+# Copyright:: Copyright (c) 2008 Lori Holden
+# License:: This code is free to use under the terms of the MIT license.
 require 'rubygems'
 require 'optparse'
 require 'rdiscount'
@@ -7,7 +12,7 @@ require 'uv'
 require 'facets'
 require 'facets/openobject'
 
-PB_PATH = File.dirname(File.dirname(__FILE__))
+PB_PATH = File.dirname(__DIR__)
 
 require File.join(PB_PATH, 'lib', 'helpers')
 require File.join(PB_PATH, 'lib', 'exceptions')
@@ -18,6 +23,7 @@ module Presentation
   
   Config = OpenObject.new
   
+  # The builder class ties everything together to build presentations
   class Builder
     include Helpers
     
@@ -25,6 +31,7 @@ module Presentation
       build_config
     end
     
+    # Build presentation
     def build
       open(Config.destination_file, 'w') do |out|
         out << process
@@ -36,9 +43,7 @@ module Presentation
       # :file     -- outside the templates dir
       # :inline   -- string
       def render(type = :template, content = '')
-        if content.nil? or content.empty?
-          raise RenderException.new "No content specified"
-        end
+        raise ArgumentError.new "No content specified" if content.blank?
         
         raw = case type
         when :file
@@ -48,7 +53,7 @@ module Presentation
         when :inline
           content
         else
-          raise RenderException.new "Unknown render type: #{type}"
+          raise ArgumentError.new "Unknown render type: #{type}"
         end
         erubis(raw)
       end
