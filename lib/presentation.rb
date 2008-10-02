@@ -19,6 +19,7 @@ require File.join(PB_PATH, 'lib', 'exceptions')
 module Presentation
   VERSION = [0, 5, 0]
   NAME = "Presentation Builder"
+  INDENT = 3
   
   # The builder class ties everything together to build presentations
   class Builder
@@ -75,7 +76,7 @@ module Presentation
           :force => false
         })
         
-        puts text.to_s.indent(3 * @_display_indent) unless silent? && !options[:force]
+        puts text.to_s.indent(INDENT * @_display_indent) unless silent? && !options[:force]
         
         if block_given?
           @_display_indent += 1
