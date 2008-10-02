@@ -14,7 +14,7 @@ module Presentation
     end
     
     def code(lang, string)
-      code_str = Uv.parse(string, 'xhtml', lang, false, Config.highlight_theme)
+      code_str = Uv.parse(string.tabto(0), 'xhtml', lang, false, config.highlight_theme)
       "\n\n#{code_str}\n\n"
     end
     
@@ -25,7 +25,7 @@ module Presentation
         :lines=> nil 
       }.merge!(options)
       
-      filename = File.join(PB_PATH, Config.example_dir, filename)
+      filename = File.join(PB_PATH, config.example_dir, filename)
       unless File.file? filename 
         return "The specified example: #{filename} does not exist."
       end
