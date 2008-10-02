@@ -75,7 +75,7 @@ module Presentation
           :force => false
         })
         
-        puts text.indent(3 * @_display_indent) unless silent? && !options[:force]
+        puts text.to_s.indent(3 * @_display_indent) unless silent? && !options[:force]
         
         if block_given?
           @_display_indent += 1
