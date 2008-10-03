@@ -25,20 +25,23 @@ module Presentation
         :lines=> nil 
       }.merge!(options)
       
-      filename = File.join(PB_PATH, config.example_dir, filename)
+      filename = File.join(config.example_dir, filename)
       unless File.file? filename 
-        return "The specified example: #{filename} does not exist."
+        error "The specified example: #{filename} does not exist."
+        exit
       end
       
       if options[:syntax].nil?
         candidates = Uv.syntax_for_file filename
         if candidates.size > 1
-          error = "Many syntaxes match, please specify\n"
-          error << "Matching syntaxes:"
-          candidates.sort.each { |name, syntax| error << "\t - " + name}
-          return error
+          msg = "Many syntaxes match, please specify\n"
+          msg << "Matching syntaxes:"
+          candidates.sort.each { |name, syntax| msg << "\t - " + name}
+          error msg
+          exit
         elsif candidates.size < 1
-          return "No default syntax found, please specify"
+          error "No default syntax found, please specify"
+          exit
         end
         
         options[:syntax] = candidates.first.first
