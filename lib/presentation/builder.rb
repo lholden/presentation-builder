@@ -1,10 +1,13 @@
-# = Presentation Builder
+# Presentation Builder
 #
 # Author:: Lori Holden (http://loriholden.com)
 # Copyright:: Copyright (c) 2008 Lori Holden
 # License:: This code is free to use under the terms of the MIT license.
 
 module Presentation
+  NAME = "Presentation Builder"
+  INDENT = 3
+  
   # The builder class ties everything together to build presentations
   class Builder
     attr_reader :config
@@ -15,7 +18,7 @@ module Presentation
       @config = OpenObject.new
       build_config
     end
-    
+
     # Build presentation
     def build
       display "Rendering to: #{config.destination_file}" do
@@ -24,9 +27,12 @@ module Presentation
         end
       end
       display "Finished!"
+    rescue Errno::ENOENT => e
+      error e.message
     end
-  
+
     protected
+    
       # :template -- relative to the templates dir
       # :file     -- outside the templates dir
       # :inline   -- string
@@ -57,10 +63,11 @@ module Presentation
       def display(text, options = {})
         @_display_indent ||= 0
         options.reverse_merge!({
-          :force => false
+          :force => false,
+          :output_to => $stdout
         })
         
-        puts text.to_s.indent(INDENT * @_display_indent) unless silent? && !options[:force]
+        options[:output_to] << text.to_s.indent(INDENT * @_display_indent) << "\n" unless silent? && !options[:force]
         
         if block_given?
           @_display_indent += 1
@@ -74,7 +81,7 @@ module Presentation
       end
       
       def error(text)
-        display text, :force => true
+        display "ERROR: #{text}", :force => true, :output_to => $stderr
       end
       
       def silent?
@@ -97,7 +104,13 @@ module Presentation
       end
       
       def build_config
-        config.update(YAML.load_file(File.join(PB_PATH, 'config.yaml')))
+        begin
+          config.update(YAML.load_file('config.yaml'))
+        rescue Errno::ENOENT => e
+          error e.message
+          display "\nTIP: You can use pbuilder-gen to create a presentation."
+          exit
+        end
         
         OptionParser.new do |opts|
           
@@ -115,7 +128,7 @@ module Presentation
             exit
           end
           opts.on_tail("--version", "Show version") do
-            help "#{NAME} - #{VERSION.join('.')}", :force => true
+            help "#{NAME} - #{VERSION::STRING}", :force => true
             exit
           end
           opts.define_tail "\nPresentation Builder - A tool for building presentations"
@@ -128,9 +141,5 @@ module Presentation
           end
         end
       end
-  end
-  
-  def self.build(*args)
-    (Builder.new).build(*args)
   end
 end

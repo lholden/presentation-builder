@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+# Author:: Lori Holden (http://loriholden.com)
+# Copyright:: Copyright (c) 2008 Lori Holden
+# License:: This code is free to use under the terms of the MIT license.
+
+require File.join(File.dirname(File.dirname(__FILE__)), 'lib', 'presentation')
+
+Presentation::Generators.run_cli Dir.pwd, $0, Presentation::VERSION::STRING, ARGV

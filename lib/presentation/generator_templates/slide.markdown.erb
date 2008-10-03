@@ -1,0 +1,14 @@
+# [slide title]
+
+* [point one]
+* [point two]
+* [point three]
+<%%= code 'ruby', %{
+def build
+  open('index.html', 'w') do |out|
+    out << process
+  end
+end
+} %>
+
+<%%= handout "[any material that should appear in print but not on the slide]" %>
