@@ -21,8 +21,8 @@ module Presentation
       file :config_yaml, 'config.yaml'
       file :title_slide, File.join('templates', 'slides', '001_title.markdown.erb')
       empty_directory :examples, 'examples'
-      empty_directory :templates_slides, File.join('templates', 'slides')
-      glob! 'public'
+      glob! 's5-ui'
+      glob! 'uv-css'
       
       invoke :layout do |g|
         g.new(destination_root, options, 'index')

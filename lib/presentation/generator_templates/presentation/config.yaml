@@ -3,6 +3,6 @@ template_dir: templates
 layout_file: index.html.erb
 slide_dir: slides # path under template_dir
 example_dir: examples
-destination_file: public/index.html
+destination_file: index.html
 slide_extension: markdown.erb
 highlight_theme: sunburst
