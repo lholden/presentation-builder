@@ -45,6 +45,7 @@ div.long {font-size: 0.75em;}
 .slide {
 	font-family: georgia, Times, 'Times New Roman', serif;
   background: transparent url(bluebg.gif) repeat-x;
+  width: 98%;
 }
 .slide h1 {position: absolute; left: 87px; z-index: 1;
  white-space: nowrap;
@@ -52,7 +53,8 @@ div.long {font-size: 0.75em;}
  top: 1em; width: 80%;
  margin: 0 auto; text-align: center; padding: 0;
  font: 150%/1em georgia, Times, 'Times New Roman', serif;
- color: #fff; background: transparent;  
+ color: #fff; background: transparent;
+ margin-left: 0.15em;
  }
 .slide h3 {font-size: 130%;}
 h1 abbr {font-variant: small-caps;}
@@ -72,11 +74,11 @@ div#controls form {position: absolute; bottom: 0; right: 0; width: 100%;
 
 #currentSlide {text-align: center; font-size: 0.5em; color: #9183BF; font-family: Verdana, Helvetica, sans-serif;}
 
-#slide0 {padding-top: 3.5em; font-size: 90%;}
+#slide0 {padding-top: 3.5em; font-size: 90%; }
 #slide0 h1 {position: static; margin: 1em 0 1.33em; padding: 0;
    white-space: normal;
    background: transparent;
-margin: 0 auto; width: 80%; text-align: center;
+margin: 0 auto; text-align: center;
    font: 2.5em Georgia, Times, 'Times New Roman', serif; height: 281px;
    color: #fff;}
 #slide0 h3 {font-size: 1.5em;}
