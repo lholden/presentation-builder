@@ -45,16 +45,16 @@ div.long {font-size: 0.75em;}
 .slide {
 	font-family: georgia, Times, 'Times New Roman', serif;
   background: transparent url(bluebg.gif) repeat-x;
-  width: 98%;
+  width: 96%;
 }
-.slide h1 {position: absolute; left: 87px; z-index: 1;
+.slide h1 {position: absolute; left: 2.25em; z-index: 1;
  white-space: nowrap;
  text-transform: capitalize;
  top: 1em; width: 80%;
  margin: 0 auto; text-align: center; padding: 0;
  font: 150%/1em georgia, Times, 'Times New Roman', serif;
  color: #fff; background: transparent;
- margin-left: 0.15em;
+ /*margin-left: 0.15em;*/
  }
 .slide h3 {font-size: 130%;}
 h1 abbr {font-variant: small-caps;}
